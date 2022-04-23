@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import router from './routes';
 const app: Express = express();
-const port = process.env.PORT || 3333;
+const port = process.env.PORT || 8080;
 
 // start the express server
 app.use(express.json());

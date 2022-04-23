@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  mongo:
+    image: bitnami/mongodb
+    ports:
+      - 27017:27017
+    networks:
+      - grpc-playground
+  api:
+    build: ./api
+    ports:
+      - '8080:8080'
+    networks:
+      - grpc-playground
+  hidra:
+    build: ./hidra
+    ports:
+      - 50051:50051
+    networks:
+      - grpc-playground
+   nix:
+    build: ./nix
+    ports:
+      - 50052:50052
+    networks:
+      - grpc-playground
+networks:
+  grpc-playground:
+    driver: bridge
