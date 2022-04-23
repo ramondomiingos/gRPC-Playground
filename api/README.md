@@ -1,4 +1,4 @@
-```
+```mermaid
 sequenceDiagram
 User->>API: POST /user
 API->>Hidra: gRPC registerUser

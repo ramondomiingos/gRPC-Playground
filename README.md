@@ -17,15 +17,15 @@ Criar uma estrutura simplificada, subdividida em **microserviços** baseado em s
 
 ### 🐝 API
 
-    Api contruida usando Typescript e express, que recebe requisiçoes HTTP, se conecta com os demais microserviços, através de gRPC.
+Api contruida usando Typescript e express, que recebe requisiçoes HTTP, se conecta com os demais microserviços, através de gRPC.
 
 ### 🐝 Hidra
 
-    O Microseviço responsável para criacao de contas, detalhamento e login, usando JWT. O microseriviço possui toda parte lógica e comunicação com banco de dados, expondo basicamente somente as assinaturas e models para os clients.
+O Microseviço responsável para criacao de contas, detalhamento e login, usando JWT. O microseriviço possui toda parte lógica e comunicação com banco de dados, expondo basicamente somente as assinaturas e models para os clients.
 
 ### 🐝 Nix
 
-    O Microseviço responsável para criacao de compras de um usuário;
+O Microseviço responsável para criacao de compras de um usuário;
 
 🔎 Os nomes dos microserviços foram baseados nos satélites naturais de Plutão. Hidra foi descoberto junto com Nix em junho de 2005.
 
@@ -35,7 +35,7 @@ Para subir somente o mongodb
 docker run -d --name=mongo -p 27017:27017 bitnami/mongodb
 ```
 
-```
+```mermaid
 flowchart LR
 graph TD
     A[user] -->|POST /user| B[API]
