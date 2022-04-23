@@ -36,7 +36,7 @@ docker run -d --name=mongo -p 27017:27017 bitnami/mongodb
 ```
 
 ```mermaid
-flowchart LR
+
 graph TD
     A[user] -->|POST /user| B[API]
     B -->|GRPC registerUser| C[Hidra]
