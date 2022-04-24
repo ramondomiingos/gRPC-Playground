@@ -1,29 +1,57 @@
-version: '3.7'
+version: '3.8'
 services:
   mongo:
+    container_name: mongodb
     image: bitnami/mongodb
     ports:
       - 27017:27017
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=2
     networks:
       - grpc-playground
   api:
+    container_name: API
     build: ./api
     ports:
       - '8080:8080'
     networks:
       - grpc-playground
+    volumes:
+      - ./data/db:/data/db
+    environment:
+      - URL_HIDRA=hidra
+      - URL_NIX=nix
+    depends_on:
+      - 'mongo'
+      - 'hidra'
+      - 'nix'
   hidra:
+    container_name: hidra
     build: ./hidra
     ports:
       - 50051:50051
     networks:
       - grpc-playground
-   nix:
+    depends_on:
+      - 'mongo'
+    links:
+      - 'mongo'
+    environment:
+      - URL_MONGO=mongo
+  nix:
+    container_name: nix
     build: ./nix
     ports:
       - 50052:50052
+    links:
+      - 'mongo'
     networks:
       - grpc-playground
+    depends_on:
+      - 'mongo'
+    environment:
+      - URL_MONGO=mongo
 networks:
   grpc-playground:
     driver: bridge

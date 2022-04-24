@@ -3,8 +3,14 @@ import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import implementation from './implementations';
 import { connect } from 'mongoose';
+const url_mongo = process.env.URL_MONGO || 'localhost';
+console.log(url_mongo);
+try {
+  connect(`mongodb://${url_mongo}:27017/test`);
+} catch (e) {
+  console.log(e);
+}
 
-connect('mongodb://localhost:27017/test');
 const packageDefinition = protoLoader.loadSync(
   path.resolve(__dirname, 'pb', 'messages.proto'),
   { keepCase: true, longs: String, enums: String, defaults: true, oneofs: true }
